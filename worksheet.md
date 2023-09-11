@@ -9,8 +9,9 @@ Respond to my comments by making new commits to the same branch.
 
 ## Review
 1. In your own words, explain what an ArrayList is. 
-
+An Array List is an array that you can change the size of.
 2. In your own words, explain what a LinkedList is. How is it different from an ArrayList?
+A LinkedList is an array that doesn't require a size specified before making it. It is different from an ArrayList because it is better for adding and deleting data from the array. ArrayList is better for reading the data.
 
 ## Exploration
 
