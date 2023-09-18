@@ -4,20 +4,29 @@ import java.lang.AssertionError;
 public class MyLinkedList <T> {
 	
 	class Node {
+		T data;
+		Node next;
 		// FIXME add member variables
 		
 		Node(T data) { // Node inherits T from MyLinkedList
+			this.data = data;
+			this.next = null;
 			// FIXME
 		}
 	}
 
+	private Node head;
+	private Node tail;
+	private int size;
 	// FIXME add member variables
 
 	/**
 	 * Construct an MyLinkedList.
 	 */
 	public MyLinkedList() {
-		// FIXME
+		head = null;
+		tail = null;
+		size = 0;// FIXME
 	}
 
 	/**
@@ -26,7 +35,7 @@ public class MyLinkedList <T> {
 	 * @return The number of elements in the MyLinkedList.
 	 */
 	public int size() {
-		return 0; // FIXME
+		return size; // FIXME
 	}
 
 	/**
@@ -35,7 +44,16 @@ public class MyLinkedList <T> {
 	 * @param element The element to add.
 	 */
 	public void add(T element) {
-		// FIXME
+		Node newNode = new Node(element);
+		if (head == null) {
+			head = newNode;
+			tail = newNode;// FIXME
+		}
+		else {
+			tail.next = newNode;
+			tail = newNode;
+		}
+		size++;
 	}
 
 	/**
@@ -47,7 +65,20 @@ public class MyLinkedList <T> {
 	 * @return The element at the specified index.
 	 */
 	public T get(int index) {
-		return null; // FIXME
+		if(index < 0 || index >= size); {
+			throw new IndexOutOfBoundsException("Index out of bounds");// FIXME
+		}
+		
+		Node currentNode = head;
+		int currentIndex = 0;
+		
+		while(currentIndex < index) {
+			currentNode = currentNode.next;
+			currentIndex++;
+		}
+		
+		return currentNode.data;
+		
 	}
 
 	/**
@@ -58,7 +89,31 @@ public class MyLinkedList <T> {
 	 * @param index The index to remove.
 	 */
 	public void remove(int index) {
-		// FIXME
+		if(index < 0 || index >= size){
+			throw new IndexOutOfBoundsException("Index out of bounds");// FIXME
+		}
+		
+		if(index == 0) {
+			head = head.next;
+			
+			if(size == 1) {
+				tail = null;
+			}
+		}
+		
+		else {
+			Node prevNode = head;
+			for(int i = 0; i < index - 1; i++) {
+				prevNode = prevNode.next;
+			}
+			
+			prevNode = prevNode.next.next;
+			if(index == size - 1) {
+				tail = prevNode;
+			}
+		}
+		
+		size--;
 	}
 
 	/**
@@ -71,7 +126,7 @@ public class MyLinkedList <T> {
 		if (this.size() > 0) {
 			result += this.get(0);
 		}
-		for (int i = 1; i < this.size; i++) {
+		for (int i = 1; i < this.size(); i++) {
 			result += ", " + this.get(i);
 		}
 		result += "}";
